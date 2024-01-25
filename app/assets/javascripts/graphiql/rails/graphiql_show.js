@@ -74,11 +74,17 @@ document.addEventListener("DOMContentLoaded", function(event) {
   } else {
     var defaultQuery = undefined;
   }
-
+  var explorerPlugin = GraphiQLPluginExplorer.explorerPlugin();
 
   // Render <GraphiQL /> into the body.
-  var elementProps = { fetcher: graphQLFetcher, defaultQuery: defaultQuery, headerEditorEnabled: graphiqlContainer.dataset.headerEditorEnabled === 'true' };
-  
+  var elementProps = {
+    fetcher: graphQLFetcher,
+    defaultQuery: defaultQuery,
+    headerEditorEnabled:
+      graphiqlContainer.dataset.headerEditorEnabled === "true",
+    plugins: [explorerPlugin],
+  };
+
   Object.assign(elementProps, { query: parameters.query, variables: parameters.variables })
   if (queryParams === 'true') {
     Object.assign(elementProps, { onEditQuery: onEditQuery, onEditVariables: onEditVariables });
